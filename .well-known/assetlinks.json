@@ -2,7 +2,7 @@
       "relation": ["delegate_permission/common.handle_all_urls"],
       "target": {
         "namespace": "android_app",
-        "package_name": "io.github.abdulla_ahmed.ColonoscopyAM",
+        "package_name": "io.github.abdulla_ahmed.ColonoscopyMass",
         "sha256_cert_fingerprints": ["8F:D7:46:36:16:89:B4:B9:6A:37:E3:0A:05:CA:72:42:7B:76:78:2F:CB:8F:AE:E9:9C:E9:D9:A9:E4:10:5B:49"]
       }
     }]
