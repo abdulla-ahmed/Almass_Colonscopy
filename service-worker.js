@@ -1,11 +1,11 @@
-const CACHE_NAME = 'HKAM-Colonoscopy-v1';
+const CACHE_NAME = 'HKMass-Colonoscopy-v1';
 const ASSETS_TO_CACHE = [
-  '/Colonscopy-abdul-majeed/',
-  '/Colonscopy-abdul-majeed/index.html',
-  '/Colonscopy-abdul-majeed/app.js',
-  '/Colonscopy-abdul-majeed/Medical Info.json', // Animation file
-  '/Colonscopy-abdul-majeed/images/icon-192x192.png',
-  '/Colonscopy-abdul-majeed/images/icon-512x512.png'
+  '/Almass_Colonscopy/',
+  '/Almass_Colonscopy/index.html',
+  '/Almass_Colonscopy/app.js',
+  '/Almass_Colonscopy/Medical Info.json', // Animation file
+  '/Almass_Colonscopy/images/icon-192x192.png',
+  '/Almass_Colonscopy/images/icon-512x512.png'
 ];
 
 // Install event: Cache assets
