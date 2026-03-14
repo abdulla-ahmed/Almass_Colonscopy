@@ -1,6 +1,6 @@
 {
-  "name": "HKAM Colonoscopy",
-  "short_name": "Colonoscopy AM",
+  "name": "HKMass Colonoscopy",
+  "short_name": "Colonoscopy Mass",
   "start_url": "/Almass_Colonscopy/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -16,6 +16,6 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ], "related_applications": [{ "platform": "play", "id": "io.github.abdulla_ahmed.ColonoscopyAM" 
+  ], "related_applications": [{ "platform": "play", "id": "io.github.abdulla_ahmed.ColonoscopyMass" 
   }]
 }
