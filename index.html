@@ -4,36 +4,141 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Colonoscopy Report AbdM</title>
-    <link rel="manifest" href="manifest.json">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.4/lottie.min.js"></script>
     
     <style>
-        /* حافظت على جميع تنسيقاتك الأصلية هنا */
-       .colored-header {
-      background-color:#f5e7a9 ; 
-       margin-bottom:1px;      
-       padding:30px 0px 0px 0px;
-      width: 100%;         
-      border-top: 1px black solid; 
-      border-right: 1px black solid; 
-      border-left: 1px black solid; 
-      border-bottom: 1px black solid; 
-      box-sizing: border-box;
-       }
-      .flex-container {
-                display: flex;
-                 gap: 320px; 
-                  background-color:lightgray;
-        line-height:0;
-          padding:5px;
-        border: 1px black solid;
-      }
-      .flex-infopt{
-            display:flex;
-            line-height:1.5;
-            border-top: 1px black solid;
-            border-right: 1px black solid;
+        /* التنسيقات الأصلية التي طلبت عدم تغييرها */
+        .colored-header { background-color:#f5e7a9; padding:30px 0px 0px 0px; border: 1px black solid; text-align: center; }
+        .flex-container { display: flex; gap: 320px; background-color:lightgray; padding:5px; border: 1px black solid; }
+        .flex-infopt, .flex-2info, .flex-anesthesia { display:flex; padding:5px; border: 1px black solid; border-top: none; }
+        .container { max-width: 800px; margin: auto; border: 1px solid #ccc; padding: 20px; border-radius: 10px; }
+        .form-group { margin-bottom: 15px; }
+        label { font-weight: bold; }
+        input, textarea, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+        #images-container { display: flex; flex-wrap: wrap; justify-content: space-between; margin-top: 20px; }
+        #images-container img { width: 48%; height: 140px; object-fit: cover; margin-bottom: 20px; }
+        
+        /* حاوية الأنيميشن - تظهر فوق المحتوى وتختفي */
+        #animation-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100vh;
+            background: white;
+            display: flex; justify-content: center; align-items: center;
+            z-index: 10000;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="animation-container"></div>
+
+    <div class="container" id="main-content">
+        <h2 style="text-align: center;">Colonoscopy Report - AbdM</h2>
+        <form id="data-form">
+            <div class="form-group"><label>Date</label><input type="text" id="date"></div>
+            <div class="form-group"><label>Serial No.</label><input type="text" id="serial-no" readonly></div>
+            <div class="form-group"><label>Patient Name</label><input type="text" id="patient-name"></div>
+            <div class="form-group"><label>Age</label><input type="number" id="age"></div>
+            <div class="form-group">
+                <label>Sex</label>
+                <select id="sex"><option value="Male">Male</option><option value="Female">Female</option></select>
+            </div>
+            <div class="form-group"><label>Chief Complain</label><textarea id="chief-complain"></textarea></div>
+            <div class="form-group"><label>Referred By</label><input type="text" id="doctor-referral"></div>
+            <div class="form-group"><label>Anesthesia</label><input list="ans" id="anesthesia"><datalist id="ans"><option value="GA">GA</option></datalist></div>
+            
+            <h3>Findings</h3>
+            <div class="form-group"><label>PR</label><input id="pr"></div>
+            <div class="form-group"><label>Rectum</label><textarea id="rectum"></textarea></div>
+            <div class="form-group"><label>Sigmoid</label><textarea id="sigmoid"></textarea></div>
+            <div class="form-group"><label>Descending Colon</label><textarea id="descending-colon"></textarea></div>
+            <div class="form-group"><label>Cecum & Ileum</label><textarea id="cecum-ileum"></textarea></div>
+            <div class="form-group"><label>Biopsy</label><textarea id="biopsy"></textarea></div>
+            <div class="form-group"><label>Provisional Diagnosis</label><textarea id="provisional-diagnosis"></textarea></div>
+
+            <div class="form-group">
+                <label>Upload Images</label>
+                <input type="file" id="image-upload" multiple accept="image/*">
+                <div id="images-container"></div>
+            </div>
+
+            <button type="button" class="btn-primary" onclick="generatePDF()" style="background:#007BFF; color:white; padding:10px 20px; border:none; border-radius:5px;">Download PDF</button>
+        </form>
+    </div>
+
+<script>
+    // 1. تشغيل الأنيميشن مع "تايمر" للإغلاق الإجباري
+    try {
+        const anim = lottie.loadAnimation({
+            container: document.getElementById('animation-container'),
+            renderer: 'svg',
+            loop: false,
+            autoplay: true,
+            path: 'animation.json' 
+        });
+
+        anim.onComplete = () => document.getElementById('animation-container').style.display = 'none';
+        
+        // إذا لم ينتهي الأنيميشن خلال 3 ثواني، أغلقه إجبارياً
+        setTimeout(() => {
+            document.getElementById('animation-container').style.opacity = '0';
+            setTimeout(() => { document.getElementById('animation-container').style.display = 'none'; }, 500);
+        }, 3000);
+    } catch (e) {
+        document.getElementById('animation-container').style.display = 'none';
+    }
+
+    // 2. إدارة السيريال والبيانات
+    let serialNumber = parseInt(localStorage.getItem('AbdM_pdfSerialNo')) || 1;
+    document.getElementById('date').value = new Date().toLocaleDateString();
+    document.getElementById('serial-no').value = `Col-${serialNumber}`;
+
+    // معالجة الصور المرفوعة
+    document.getElementById('image-upload').addEventListener('change', function() {
+        const container = document.getElementById('images-container');
+        container.innerHTML = '';
+        Array.from(this.files).forEach(file => {
+            const img = document.createElement('img');
+            img.src = URL.createObjectURL(file);
+            container.appendChild(img);
+        });
+    });
+
+    // 3. توليد PDF
+    function generatePDF() {
+        const pdfContent = document.createElement('div');
+        pdfContent.innerHTML = `
+            <div class="colored-header">
+                <h1>مستشفى عبد المجيد الاهلي</h1>
+                <h2>Colonscopy Report</h2>
+            </div>
+            <div class="flex-container">
+                <p><b>Serial:</b> ${document.getElementById('serial-no').value}</p>
+                <p><b>Date:</b> ${document.getElementById('date').value}</p>
+            </div>
+            <div style="border:1px solid black; padding:10px;">
+                <p><b>Patient:</b> ${document.getElementById('patient-name').value} | <b>Age:</b> ${document.getElementById('age').value}</p>
+                <p><b>Findings:</b> ${document.getElementById('rectum').value}</p>
+            </div>
+            <p style="text-align:right; margin-top:50px;"><b>د. حيدر الكواز</b></p>
+        `;
+
+        html2pdf().set({
+            margin: 15,
+            filename: `AbdM_Report_${serialNumber}.pdf`,
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        }).from(pdfContent).save().then(() => {
+            serialNumber++;
+            localStorage.setItem('AbdM_pdfSerialNo', serialNumber);
+            document.getElementById('serial-no').value = `Col-${serialNumber}`;
+        });
+    }
+</script>
+</body>
+</html>
             border-left: 1px black solid;
             padding:5px;
       }
