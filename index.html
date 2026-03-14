@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Colonoscopy Report Almass</title>
+    <title>Colonoscopy Report AbdM</title>
     <link rel="manifest" href="manifest.json">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.4/lottie.min.js"></script>
     
     <style>
+        /* حافظت على جميع تنسيقاتك الأصلية هنا */
        .colored-header {
       background-color:#f5e7a9 ; 
        margin-bottom:1px;      
@@ -34,6 +36,293 @@
             border-right: 1px black solid;
             border-left: 1px black solid;
             padding:5px;
+      }
+      .item-namept { margin-right:120px; }
+      .item-agept { margin-right:50px; }
+      .flex-2info{
+            display:flex;
+            line-height:1;
+            border-right: 1px black solid;
+            border-left: 1px black solid;
+            padding:5px;
+      }
+      .item-Cc { margin-right:80px; }
+      .flex-anesthesia{
+            display:flex;
+            line-height:1;
+            border-bottom: 1px black solid;
+            border-right: 1px black solid;
+            border-left: 1px black solid;
+            padding:5px;
+      }
+      .flex-findingpr{
+            display:flex;
+            line-height:1;
+            border-top:1px black solid;
+            border-right: 1px black solid;
+            border-left: 1px black solid;
+            padding:5px;
+      }
+      .flex-findingrectum, .flex-findingsigmoid, .flex-findingdescending-colon, 
+      .flex-findingsplenic-flexure, .flex-findingtransverse-colon, .flex-findinghepatic-flexure, 
+      .flex-findingascending-colon {
+            display:flex;
+            line-height:1;
+            border-right: 1px black solid;
+            border-left: 1px black solid;
+            padding:5px;
+      }
+      .flex-findingcecum-ileum{
+            display:flex;
+            line-height:1;
+            border-right: 1px black solid;
+            border-left: 1px black solid;
+            border-bottom: 1px black solid;
+            padding:5px;
+      }
+      .flex-biopsy, .flex-recommendation, .flex-provisional-diagnosis {
+            display:flex;
+            line-height:1;
+            border: 1px black solid;
+            padding:5px;
+      }
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        
+        /* تعديل حاوية الأنيميشن لمنع التكرار */
+        #animation-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100vh;
+            display: flex; justify-content: center; align-items: center;
+            background: white; z-index: 9999;
+        }
+      
+        .container {
+            display: none; /* تظهر فقط بعد انتهاء الأنيميشن */
+            max-width: 800px;
+            margin: auto;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group { margin-bottom: 15px; }
+        label { font-weight: bold; }
+        input, textarea, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+        #images-container { display: flex; flex-wrap: wrap; justify-content: space-between; margin-top: 20px; }
+        #images-container img { width: 48%; height: 140px; object-fit: cover; margin-bottom: 20px; }
+        .button-group { text-align: right; }
+        button { padding: 10px 15px; margin: 5px; border: none; border-radius: 5px; cursor: pointer; }
+        .btn-primary { background-color: #007BFF; color: white; }
+        .btn-secondary { background-color: #6C757D; color: white; }
+    </style>
+</head>
+<body>
+    <div id="animation-container"></div>
+
+    <div class="container" id="main-content">
+        <h2 style="text-align: center;">Colonoscopy Report - AbdM</h2>
+        <form id="data-form">
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="text" id="date">
+            </div>
+            <div class="form-group">
+                <label for="serial-no">Serial No.</label>
+                <input type="text" id="serial-no" readonly>
+            </div>
+            <div class="form-group">
+                <label for="patient-name">Patient Name</label>
+                <input type="text" id="patient-name">
+            </div>
+            <div class="form-group"><label for="age">Age</label><input type="number" id="age"></div>
+            <div class="form-group">
+                <label for="sex">Sex</label>
+                <select id="sex">
+                    <option value="">Select</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+            <div class="form-group"><label for="doctor-referral">Referred By</label><input type="text" id="doctor-referral"></div>
+            <div class="form-group"><label for="chief-complain">Chief Complain</label><textarea id="chief-complain"></textarea></div>
+            <div class="form-group">
+                <label for="anesthesia">Type of Anesthesia</label>
+                <input list="anesthesia-options" id="anesthesia" placeholder="Write or select" />
+                <datalist id="anesthesia-options">
+                    <option value="Local anesthesia (xylocaine ointment & spray)">
+                    <option value="GA +Mask">
+                    <option value="GA + nasal canula">
+                    <option value="GA +Tube">
+                </datalist>
+            </div>
+            <h3>Procedure Findings</h3>
+            <div class="form-group">
+                <label for="pr">PR</label>
+                <input list="pr-options" id="pr" placeholder="Write or select" />
+                <datalist id="pr-options"><option value="normal PR examination no blood or mass felt"></datalist>
+            </div>
+            <div class="form-group"><label for="rectum">Rectum</label><textarea id="rectum"></textarea></div>
+            <div class="form-group"><label for="sigmoid">Sigmoid</label><textarea id="sigmoid"></textarea></div>
+            <div class="form-group"><label for="descending-colon">Descending Colon</label><textarea id="descending-colon"></textarea></div>
+            <div class="form-group"><label for="splenic-flexure">Splenic Flexure</label><textarea id="splenic-flexure"></textarea></div>
+            <div class="form-group"><label for="transverse-colon">Transverse Colon</label><textarea id="transverse-colon"></textarea></div>
+            <div class="form-group"><label for="hepatic-flexure">Hepatic Flexure</label><textarea id="hepatic-flexure"></textarea></div>
+            <div class="form-group"><label for="ascending-colon">Ascending Colon</label><textarea id="ascending-colon"></textarea></div>
+            <div class="form-group"><label for="cecum-ileum">Cecum and Ileum</label><textarea id="cecum-ileum"></textarea></div>
+            <div class="form-group"><label for="biopsy">Biopsy</label><textarea id="biopsy"></textarea></div>
+            <div class="form-group"><label for="recommendation">Recommendation and Notes</label><textarea id="recommendation"></textarea></div>
+            <div class="form-group"><label for="provisional-diagnosis">Provisional Diagnosis</label><textarea id="provisional-diagnosis"></textarea></div>
+            
+            <div class="form-group">
+                <label for="image-upload">Upload Images</label>
+                <input type="file" id="image-upload" multiple accept="image/*">
+                <div id="images-container"></div>
+            </div>
+            <div class="button-group">
+                <button type="button" class="btn-primary" onclick="generatePDF()">Download PDF</button>
+                <button type="reset" class="btn-secondary">Reset</button>
+            </div>
+        </form>
+    </div>
+
+<script>
+    // 1. تشغيل الأنيميشن والتحكم في ظهوره
+    // قمت بإزالة استدعاء app.js الخارجي ووضعت المنطق هنا مباشرة لضمان عدم التكرار
+    const anim = lottie.loadAnimation({
+        container: document.getElementById('animation-container'),
+        renderer: 'svg',
+        loop: false,
+        autoplay: true,
+        path: 'animation.json' // تأكد من اسم ملفك
+    });
+
+    anim.onComplete = function() {
+        document.getElementById('animation-container').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
+    };
+
+    // حماية في حال لم يعمل الأنيميشن
+    setTimeout(() => {
+        if (document.getElementById('main-content').style.display !== 'block') {
+            document.getElementById('animation-container').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+        }
+    }, 3500);
+
+    // 2. إدارة السيريال والبيانات (AbdM Unique Keys)
+    let serialNumber = parseInt(localStorage.getItem('AbdM_pdfSerialNo')) || 1;
+    document.getElementById('date').value = new Date().toLocaleDateString();
+    document.getElementById('serial-no').value = `Col-${serialNumber}`;
+
+    function storeImageInLocalStorage(url, key) {
+        if (!localStorage.getItem(key)) {
+            fetch(url).then(res => res.blob()).then(blob => {
+                const reader = new FileReader();
+                reader.onload = () => localStorage.setItem(key, reader.result);
+                reader.readAsDataURL(blob);
+            }).catch(err => console.log("Img load error"));
+        }
+    }
+
+    // استخدام مفاتيح فريدة لـ AbdM
+    storeImageInLocalStorage("/Almass_Colonscopy/picture/signature_hayderk.png", 'AbdM_sig');
+    storeImageInLocalStorage("/Almass_Colonscopy/picture/almass.png", 'AbdM_watermark');
+    storeImageInLocalStorage("/Almass_Colonscopy/picture/drh_tree.png", 'AbdM_tree');
+
+    document.getElementById('image-upload').addEventListener('change', function () {
+        const container = document.getElementById('images-container');
+        container.innerHTML = '';
+        Array.from(this.files).forEach(file => {
+            const img = document.createElement('img');
+            img.src = URL.createObjectURL(file);
+            container.appendChild(img);
+        });
+    });
+
+    // 3. توليد الـ PDF (بنفس تنسيقاتك تماماً)
+    function generatePDF() {
+        const pdfContent = document.createElement('div');
+        pdfContent.innerHTML = `
+            <div class="colored-header">
+                <h1 style="text-align:center;line-height:1.5;">مستشفى عبد المجيد الاهلي</h1>
+                <h2 style="text-align: center;line-height:1;">Colonscopy Report</h2>
+                <p style="text-align:center;line-height:0.5;">بغداد - الكرادة</p>
+            </div>
+            <div class="flex-container">
+                <p><b>Serial No.:</b> ${document.getElementById('serial-no').value}</p>
+                <p><b>Date:</b> ${document.getElementById('date').value}</p>
+            </div>
+            <div class="flex-infopt">
+                <div class="item-namept"><b>Patient Name:</b> ${document.getElementById('patient-name').value}</div>
+                <div class="item-agept"><b>Age:</b> ${document.getElementById('age').value}</div>
+                <div><b>Sex:</b> ${document.getElementById('sex').value}</div>
+            </div>
+            <div class="flex-2info">
+                <div class="item-Cc"><b>Chief Complain:</b> ${document.getElementById('chief-complain').value}</div>
+                <div><b>Referred by:</b> ${document.getElementById('doctor-referral').value}</div>
+            </div>
+            <div class="flex-anesthesia"><b>Anesthesia:</b> ${document.getElementById('anesthesia').value}</div>
+            <h2 style="line-height:1;">Procedure Findings</h2>
+            <div class="flex-findingpr"><b>PR:</b> ${document.getElementById('pr').value}</div>
+            <div class="flex-findingrectum"><b>Rectum:</b> ${document.getElementById('rectum').value}</div>
+            <div class="flex-findingsigmoid"><b>Sigmoid:</b> ${document.getElementById('sigmoid').value}</div>
+            <div class="flex-findingdescending-colon"><b>Descending Colon:</b> ${document.getElementById('descending-colon').value}</div>
+            <div class="flex-findingsplenic-flexure"><b>Splenic Flexure:</b> ${document.getElementById('splenic-flexure').value}</div>
+            <div class="flex-findingtransverse-colon"><b>Transverse Colon:</b> ${document.getElementById('transverse-colon').value}</div>
+            <div class="flex-findinghepatic-flexure"><b>Hepatic Flexure:</b> ${document.getElementById('hepatic-flexure').value}</div>
+            <div class="flex-findingascending-colon"><b>Ascending Colon:</b> ${document.getElementById('ascending-colon').value}</div>
+            <div class="flex-findingcecum-ileum"><b>Cecum and Ileum:</b> ${document.getElementById('cecum-ileum').value}</div>
+            <div class="flex-biopsy" style="margin-top:10px;"><b>Biopsy:</b> ${document.getElementById('biopsy').value}</div>
+            <div class="flex-recommendation" style="margin-top:10px;"><b>Recommendation:</b> ${document.getElementById('recommendation').value}</div>
+            <div class="flex-provisional-diagnosis" style="margin-top:10px;"><b>Provisional Diagnosis:</b> ${document.getElementById('provisional-diagnosis').value}</div>
+            
+            <p style="text-align:right; padding:40px 45px 0 0; font-weight: bold;">الجراح الاستشاري</p> 
+            <p style="text-align:right; padding:0 40px; font-weight: bold; font-size:23px;">الدكتور حيدر الكواز</p>
+        `;
+
+        // إضافة الصور الثابتة
+        const addImg = (key, width, top, left, z, op) => {
+            const src = localStorage.getItem(key);
+            if (src) {
+                const img = document.createElement('img');
+                img.src = src;
+                img.style.cssText = `position:absolute; width:${width}; top:${top}; left:${left}; z-index:${z}; opacity:${op};`;
+                pdfContent.appendChild(img);
+            }
+        };
+
+        addImg('AbdM_sig', '150px', '250px', '70%', '10', '1');
+        addImg('AbdM_tree', '100px', '260px', '10%', '10', '1');
+        addImg('AbdM_watermark', '450px', '50px', '15%', '1', '0.1');
+
+        // صفحة الصور
+        const images = Array.from(document.querySelectorAll('#images-container img'));
+        if (images.length) {
+            let imgPage = document.createElement('div');
+            imgPage.style.cssText = "page-break-before:always; display:grid; grid-template-columns:1fr 1fr; gap:20px; padding:20px;";
+            images.forEach(img => {
+                const clone = img.cloneNode();
+                clone.style.width = "100%"; clone.style.height = "200px";
+                imgPage.appendChild(clone);
+            });
+            pdfContent.appendChild(imgPage);
+        }
+
+        html2pdf().set({
+            margin: 15,
+            filename: `AbdM_Report_${serialNumber}.pdf`,
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        }).from(pdfContent).save().then(() => {
+            serialNumber++;
+            localStorage.setItem('AbdM_pdfSerialNo', serialNumber);
+            document.getElementById('serial-no').value = `Col-${serialNumber}`;
+        });
+    }
+</script>
+</body>
+</html>
       }
       .item-namept { margin-right:120px; }
       .item-agept { margin-right:50px; }
