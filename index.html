@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Medical Prescription App</title>
+    <link rel="manifest" href="manifest.json">
+  <style>
+    body {
+      font-family: 'Times New Roman', Times, serif;
+      margin: 20px;
+      background-color: #f9f9f9;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin: 10px 0 5px;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+    .error {
+      color: red;
+      font-size: 0.9em;
+      margin-top: -10px;
+    }
+    .link {
+      display: block;
+      text-align: center;
+      margin-top: 10px;
+    }
+    #animation-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+  </style>
+</head>
+<body>
+<div id="animation-container"></div>
+    <div class="container"style="display: none">
+    <h1>Welcome to Al Mass Hosp. OGD Report</h1>
+
+    <div id="loginForm">
+      <h2>Login</h2>
+      <label for="loginUsername">Username</label>
+      <input type="text" id="loginUsername" placeholder="Enter your username" required>
+      <label for="loginPassword">Password</label>
+      <input type="password" id="loginPassword" placeholder="Enter your password" required>
+      <button type="button" onclick="loginUser()">Login</button>
+      <p class="error" id="loginError"></p>
+    </div>
+
+    <div id="registerForm" style="display: none;">
+      </div>
+
+    <div class="link">
+      <p>Please log in to access the app.</p>
+    </div>
+  </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.4/lottie.min.js"></script>
+  <script src="app.js"></script>
+  <script> if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then((registration) => {
+          console.log('Service Worker registered with scope:', registration.scope);
+        })
+        .catch((error) => {
+          console.error('Service Worker registration failed:', error);
+        });
+}
+  </script>
+  <script>
+    // هنا نضع اسم المستخدم وكلمة المرور في الكود
+    const VALID_USERNAME = "admin";
+    const VALID_PASSWORD = "password123";
+
+    function loginUser() {
+      const username = document.getElementById('loginUsername').value;
+      const password = document.getElementById('loginPassword').value;
+
+      // التحقق المباشر من القيم الموجودة في الكود
+      if (username === VALID_USERNAME && password === VALID_PASSWORD) {
+        // تخزين معلومات وهمية للجلسة لضمان عمل صفحة الترحيب
+        const user = { name: "Administrator", username: username };
+        localStorage.setItem('loggedInUser', JSON.stringify(user));
+        window.location.href = "welcome.html"; 
+      } else {
+        showError('loginError', 'Invalid username or password!');
+      }
+    }
+
+    function showError(errorElementId, errorMessage) {
+      const errorElement = document.getElementById(errorElementId);
+      errorElement.textContent = errorMessage;
+    }
+
+    function clearErrors() {
+      document.querySelectorAll('.error').forEach(error => error.textContent = '');
+    }
+  </script>
+</body>
+</html>
