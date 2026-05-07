@@ -7,16 +7,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
     
     <style>
-       /* هذه الإضافة تضمن بقاء الفراغات داخل حدود الـ 800px */
-       * {
-           box-sizing: border-box;
-       }
-
        .colored-header {
-      background-color:#f5e7a9 ; /* Set the background color */
-       margin-bottom:1px;      /* Add spacing inside the section */
+      background-color:#f5e7a9 ; 
+       margin-bottom:1px;      
        padding:30px 0px 0px 0px;
-      width: 100%;         /* Section width */
+      width: 100%;         
       border-top: 1px black solid; 
       border-right: 1px black solid; 
       border-left: 1px black solid; 
@@ -25,7 +20,7 @@
        }
       .flex-container {
                 display: flex;
-                 gap: 320px; /* Adjust spacing between paragraphs */
+                 gap: 320px; 
                   background-color:lightgray;
         line-height:0;
           padding:5px;
@@ -45,8 +40,6 @@
       .item-agept {
             margin-right:50px;
       }
-      .item-sexpt {
-      }
       .flex-2info{
             display:flex;
             line-height:1;
@@ -57,9 +50,6 @@
       .item-Cc {
             margin-right:80px;
       }
-      .item-Ref {
-            
-      }
       .flex-anesthesia{
             display:flex;
             line-height:1;
@@ -67,11 +57,7 @@
             border-right: 1px black solid;
             border-left: 1px black solid;
             padding:5px;
-            
       }
-            .item-anesthesia {
-            }
-            
       .flex-findingpr{
             display:flex;
             line-height:1;
@@ -80,9 +66,6 @@
             border-left: 1px black solid;
             padding:5px;
       }
-      .item-pr {
-            
-      }
       .flex-findingrectum{
             display:flex;
             line-height:1;
@@ -90,9 +73,6 @@
             border-left: 1px black solid;
             padding:5px;
       }
-      .item-rectum{
-      }
-      
       .flex-findingsigmoid{
             display:flex;
             line-height:1;
@@ -100,9 +80,6 @@
             border-left: 1px black solid;
             padding:5px;
       }
-      .sigmoid{
-      }
-      
       .flex-findingdescending-colon{
             display:flex;
             line-height:1;
@@ -110,17 +87,12 @@
             border-left: 1px black solid;
             padding:5px;
       }
-      .dcolon{
-      }
-      
       .flex-findingsplenic-flexure{
             display:flex;
             line-height:1;
             border-right: 1px black solid;
             border-left: 1px black solid;
             padding:5px;
-      }
-      .sf{
       }
       .flex-findingtransverse-colon{
             display:flex;
@@ -129,8 +101,6 @@
             border-left: 1px black solid;
             padding:5px;
       }
-      .tcolon{
-      }
       .flex-findinghepatic-flexure{
             display:flex;
             line-height:1;
@@ -138,16 +108,12 @@
             border-left: 1px black solid;
             padding:5px;
       }
-      .hf{
-      }
       .flex-findingascending-colon{
             display:flex;
             line-height:1;
             border-right: 1px black solid;
             border-left: 1px black solid;
             padding:5px;
-      }
-      .acolon{
       }
       .flex-findingcecum-ileum{
             display:flex;
@@ -157,30 +123,41 @@
             border-bottom: 1px black solid;
             padding:5px;
       }
-      .c&i{
-      }
       .flex-biopsy{
             display:flex;
             line-height:1;
             border-top:1px black solid;
             border-right: 1px black solid;
-            border-left: 1px black solid; border-bottom: 1px black solid; padding:5px; } .biopsy{ } .flex-recommendation{ display:flex; line-height:1; border-top:1px black solid; border-right: 1px black solid; border-left: 1px black solid; border-bottom: 1px black solid; padding:5px; } .rec{ } .flex-provisional-diagnosis{ display:flex; line-height:1; border-top:1px black solid; border-right: 1px black solid; border-left: 1px black solid; border-bottom: 1px black solid; padding:5px; } .pd{ } 
-            
+            border-left: 1px black solid;
+            border-bottom: 1px black solid;
+            padding:5px;
+      }
+      .flex-recommendation{
+            display:flex;
+            line-height:1;
+            border-top:1px black solid;
+            border-right: 1px black solid;
+            border-left: 1px black solid;
+            border-bottom: 1px black solid;
+            padding:5px;
+      }
+      .flex-provisional-diagnosis{
+            display:flex;
+            line-height:1;
+            border-top:1px black solid;
+            border-right: 1px black solid;
+            border-left: 1px black solid;
+            border-bottom: 1px black solid;
+            padding:5px;
+      }
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
         }
-
-        #animation-container {
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-      
+        
+        /* تعديل: تم تغيير display من none إلى block ليظهر النموذج */
         .container {
-            display: block; 
+            display: block;
             max-width: 800px;
             margin: auto;
             border: 1px solid #ccc;
@@ -202,20 +179,19 @@
             border-radius: 5px;
         }
         #images-container {
-        display: flex;
-        flex-wrap: wrap; /* Allows wrapping of images into multiple rows */
-        justify-content: space-between; /* Ensure images are spaced evenly */
-        margin-top: 20px;
-    }
-
-    #images-container img {
-        width: 48%;  /* Width to fit 2 images per row */
-        height: 140px; /* Fixed height for consistency */
-        object-fit: cover; /* Ensures images maintain their aspect ratio */
-        margin-bottom: 20px; /* Space between rows of images */
-        border: none; /* Removes any borders around images */
-        padding: 0; /* Ensures no padding is added */
-    }
+            display: flex;
+            flex-wrap: wrap; 
+            justify-content: space-between; 
+            margin-top: 20px;
+        }
+        #images-container img {
+            width: 48%;  
+            height: 140px; 
+            object-fit: cover; 
+            margin-bottom: 20px; 
+            border: none; 
+            padding: 0; 
+        }
         .button-group {
             text-align: right;
         }
@@ -237,6 +213,7 @@
     </style>
 </head>
 <body>
+
     <div class="container">
         <h2 style="text-align: center;">Colonoscopy Report Al Mass Hosp.</h2>
         <form id="data-form">
@@ -276,20 +253,21 @@
                 <label for="anesthesia">Type of Anesthesia</label>
                 <input list="anesthesia-options" id="anesthesia" placeholder="Write or select" />
                 <datalist id="anesthesia-options">
-                <option value="Local anesthesia (xylocaine ointment & spray)">
-                <option value="GA +Mask">
-			    <option value="GA + nasal canula">
-                <option value="GA +Tube">
+                    <option value="Local anesthesia (xylocaine ointment & spray)">
+                    <option value="GA +Mask">
+                    <option value="GA + nasal canula">
+                    <option value="GA +Tube">
                 </datalist>
-                </div>
+            </div>
+
             <h3>Procedure Findings</h3>
             <div class="form-group">
                 <label for="pr">PR</label>
                 <input list="pr-options" id="pr" placeholder="Write or select" />
                 <datalist id="pr-options">
-                <option value="normal PR examination no blood or mass felt">
+                    <option value="normal PR examination no blood or mass felt">
                 </datalist>
-                </div>
+            </div>
             <div class="form-group">
                 <label for="rectum">Rectum</label>
                 <textarea id="rectum"></textarea>
@@ -334,6 +312,7 @@
                 <label for="provisional-diagnosis">Provisional Diagnosis</label>
                 <textarea id="provisional-diagnosis"></textarea>
             </div>
+
             <div class="form-group">
                 <label for="image-upload">Upload Images</label>
                 <input type="file" id="image-upload" multiple accept="image/*">
@@ -343,46 +322,32 @@
                 <button type="button" class="btn-primary" onclick="generatePDF()">Download PDF</button>
                 <button type="reset" class="btn-secondary">Reset</button>
             </div>
-            
         </form>
     </div>
 
  <script>
-    
-    // Retrieve the current serial number from localStorage or initialize it to 1
     let serialNumber = parseInt(localStorage.getItem('Alm_Col_SerialNo')) || 1;
-
-    // Set the initial serial number in the Serial No. input field
     document.getElementById('date').value = new Date().toLocaleDateString();
     document.getElementById('serial-no').value = `Col-${serialNumber}`;
 
-function storeImageInLocalStorage(url, key) {
-    if (!localStorage.getItem(key)) {
-        fetch(url)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.blob();
-            })
-            .then(blob => {
-                const reader = new FileReader();
-                reader.onload = function () {
-                    localStorage.setItem(key, reader.result); // Base64 representation
-                };
-                reader.readAsDataURL(blob);
-            })
-            .catch(error => {
-                console.error('There was a problem with the fetch operation:', error);
-            });
+    // وظيفة لتحميل الصور من السيرفر وتخزينها في المتصفح
+    function storeImageInLocalStorage(url, key) {
+        if (!localStorage.getItem(key)) {
+            fetch(url)
+                .then(response => { if (!response.ok) throw new Error('Network response error'); return response.blob(); })
+                .then(blob => {
+                    const reader = new FileReader();
+                    reader.onload = function () { localStorage.setItem(key, reader.result); };
+                    reader.readAsDataURL(blob);
+                }).catch(error => console.error('Error fetching image:', error));
+        }
     }
-}
 
-storeImageInLocalStorage("/Almass_Colonscopy/picture/signature_hayderk.png", 'Alm_Col_sig');
-storeImageInLocalStorage("/Almass_Colonscopy/picture/almass.png", 'Alm_Col_watermark');
-storeImageInLocalStorage("/Almass_Colonscopy/picture/drh_tree.png", 'Alm_Col_tree');
+    storeImageInLocalStorage("/Almass_Colonscopy/picture/signature_hayderk.png", 'Alm_Col_sig');
+    storeImageInLocalStorage("/Almass_Colonscopy/picture/almass.png", 'Alm_Col_watermark');
+    storeImageInLocalStorage("/Almass_Colonscopy/picture/drh_tree.png", 'Alm_Col_tree');
    
- const imageUpload = document.getElementById('image-upload');
+    const imageUpload = document.getElementById('image-upload');
     const imagesContainer = document.getElementById('images-container');
 
     imageUpload.addEventListener('change', function () {
@@ -395,213 +360,128 @@ storeImageInLocalStorage("/Almass_Colonscopy/picture/drh_tree.png", 'Alm_Col_tre
     });
 
     function generatePDF() {
-    	
         const pdfContent = document.createElement('div');
-         pdfContent.innerHTML = `
+        pdfContent.innerHTML = `
         <div class="colored-header">
-        <h1 style="text-align:center;line-height:1.5;">مستشفى الماس الاهلي</h1>
+            <h1 style="text-align:center;line-height:1.5;">مستشفى الماس الاهلي</h1>
             <h2 style="text-align: center;line-height:1;">Colonscopy Report</h2>
-      <p style= "text-align:center;line-height:0.5;">  07755554020 , بغداد الكرادة قرب ساحة كهرمانة هاتف 07855554020 </p>
-          </div>
-          <p style="line-height: 0.5; padding: 0; margin: 0;">&nbsp;</p>  
-        
-          <div class="flex-container">
-            <p><b>Serial No.:</b>  ${document.getElementById('serial-no').value}</p>
+            <p style= "text-align:center;line-height:0.5;">07755554020 , بغداد الكرادة قرب ساحة كهرمانة هاتف 07855554020 </p>
+        </div>
+        <p style="line-height: 0.5; padding: 0; margin: 0;">&nbsp;</p>  
+        <div class="flex-container">
+            <p><b>Serial No.:</b> ${document.getElementById('serial-no').value}</p>
             <p><b>Date:</b> ${document.getElementById('date').value}</p>
-          </div>
+        </div>
         <hr>
-            <div class="flex-infopt">
+        <div class="flex-infopt">
             <div class="item-namept"><b>Patient Name:</b> ${document.getElementById('patient-name').value}</div>
             <div class= "item-agept"><b>Age:</b> ${document.getElementById('age').value}</div>
             <div class= "item-sex"><b>Sex:</b> ${document.getElementById('sex').value}</div>
-          </div>
-          
-            <div class="flex-2info">
+        </div>
+        <div class="flex-2info">
             <div class="item-Cc"><b>Chief Complain:</b> ${document.getElementById('chief-complain').value}</div>
             <div class="item-Ref"><b>Referred by:</b> ${document.getElementById('doctor-referral').value}</div>
-          </div>
-          <div class="flex-anesthesia">
-          <div class="item-anesthesia"><b>Anesthesia:</b> ${document.getElementById('anesthesia').value}
-          </div>
-          </div>
-          
-          <h2 style="line-height:0.5;line-height:0.5;">Procedure Findings</h2>
-           
-          <div class="flex-findingpr">
+        </div>
+        <div class="flex-anesthesia">
+            <div class="item-anesthesia"><b>Anesthesia:</b> ${document.getElementById('anesthesia').value}</div>
+        </div>
+        <h2 style="line-height:0.5;line-height:0.5;">Procedure Findings</h2>
+        <div class="flex-findingpr">
             <div class="item-pr"><b>PR:</b> ${document.getElementById('pr').value}</div>
-           </div>
-          <div class="flex-findingrectum">
+        </div>
+        <div class="flex-findingrectum">
             <div class="item-rectum"><b>Rectum:</b> ${document.getElementById('rectum').value}</div>
-          </div>
-          <div class="flex-findingsigmoid">
+        </div>
+        <div class="flex-findingsigmoid">
             <div class="sigmoid"><b>Sigmoid:</b> ${document.getElementById('sigmoid').value}</div>
-          </div>
-          <div class="flex-findingdescending-colon">
+        </div>
+        <div class="flex-findingdescending-colon">
             <div class="dcolon"><b>Descending Colon:</b> ${document.getElementById('descending-colon').value}</div>
-          </div>
-          <div class="flex-findingsplenic-flexure">
+        </div>
+        <div class="flex-findingsplenic-flexure">
             <div class="sf"><b>Splenic Flexure:</b> ${document.getElementById('splenic-flexure').value}</div>
-          </div>
-          <div class="flex-findingtransverse-colon">
+        </div>
+        <div class="flex-findingtransverse-colon">
             <div class="tcolon"><b>Transverse Colon:</b> ${document.getElementById('transverse-colon').value}</div>
-          </div>
-          <div class="flex-findinghepatic-flexure">
+        </div>
+        <div class="flex-findinghepatic-flexure">
             <div class="hf"><b>Hepatic Flexure:</b> ${document.getElementById('hepatic-flexure').value}</div>
-          </div>
-          <div class="flex-findingascending-colon">
+        </div>
+        <div class="flex-findingascending-colon">
             <div class="acolon"><b>Ascending Colon:</b> ${document.getElementById('ascending-colon').value}</div>
-           </div>
-          <div class="flex-findingcecum-ileum">
+        </div>
+        <div class="flex-findingcecum-ileum">
             <div class="c&i"><b>Cecum and Ileum:</b> ${document.getElementById('cecum-ileum').value}</div>
-          </div>
+        </div>
         <p style="line-height: 0.8; padding: 0; margin: 0;">&nbsp;</p>
-           <div class="flex-biopsy">
-          <div class="biopsy"><b>Biopsy:</b> ${document.getElementById('biopsy').value}</div>
-          </div>
-           <p style="line-height: 0.8; padding: 0; margin: 0;">&nbsp;</p>
-            <div class="flex-recommendation">
+        <div class="flex-biopsy">
+            <div class="biopsy"><b>Biopsy:</b> ${document.getElementById('biopsy').value}</div>
+        </div>
+        <p style="line-height: 0.8; padding: 0; margin: 0;">&nbsp;</p>
+        <div class="flex-recommendation">
             <div class="rec"><b>Recommendation and Notes:</b> ${document.getElementById('recommendation').value}</div>
-            </div>
+        </div>
         <p style="line-height: 0.8; padding: 0; margin: 0;">&nbsp;</p>
-          <div class="flex-provisional-diagnosis">
-          <div class="pd"><b>Provisional Diagnosis:</b> ${document.getElementById('provisional-diagnosis').value}</div>
-          </div>
-<p style="text-align:right;marginTop:'20px';padding:40px 45px 0px 40px;font-weight: bold;">الجراح الاستشاري&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p> 
-<p style="text-align:right;marginTop:'0px';line-height:0;padding:0px 40px ;font-weight: bold;font-size:23px;">الدكتور حيدر الكواز</p>
-
-
+        <div class="flex-provisional-diagnosis">
+            <div class="pd"><b>Provisional Diagnosis:</b> ${document.getElementById('provisional-diagnosis').value}</div>
+        </div>
+        <p style="text-align:right;marginTop:'20px';padding:40px 45px 0px 40px;font-weight: bold;">الجراح الاستشاري&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p> 
+        <p style="text-align:right;marginTop:'0px';line-height:0;padding:0px 40px ;font-weight: bold;font-size:23px;">الدكتور حيدر الكواز</p>
         `;
-        
- const sigimga = localStorage.getItem('Alm_Col_sig');
-if (sigimga) {
-    const formDiv = document.createElement('div');
-    formDiv.style.textAlign = 'center';
-    formDiv.style.marginTop = '-450px';
-    formDiv.style.position = 'absolute'; 
-    
-    const pic = document.createElement('img'); 
-    pic.src = sigimga;
-    pic.style.width = '150px'; 
-    pic.style.position = 'relative'; 
-    pic.style.top = '330px'; 
-    pic.style.left = '400%';
-    pic.style.transform = 'translateX(-100%)'; 
-    pic.style.zIndex = '3'; 
-    pic.style.opacity = '1'; 
-    pic.style.float = 'none';
 
-    formDiv.appendChild(pic);
-    pdfContent.appendChild(formDiv); 
-}
+        // إدراج التوقيع واللوغو كما في الكود الأصلي
+        const sigimga = localStorage.getItem('Alm_Col_sig');
+        if (sigimga) {
+            const formDiv = document.createElement('div');
+            formDiv.style.textAlign = 'center'; formDiv.style.marginTop = '-450px'; formDiv.style.position = 'absolute'; 
+            const pic = document.createElement('img'); pic.src = sigimga; pic.style.width = '150px'; pic.style.position = 'relative'; pic.style.top = '330px'; pic.style.left = '400%'; pic.style.transform = 'translateX(-100%)'; pic.style.zIndex = '3'; pic.style.opacity = '1'; formDiv.appendChild(pic);
+            pdfContent.appendChild(formDiv);
+        }
 
-const treeimga = localStorage.getItem('Alm_Col_tree');
-if (treeimga) {
-    const formiDiv = document.createElement('div');
-    formiDiv.style.textAlign = 'center';
-    formiDiv.style.marginTop = '-450px';
-    formiDiv.style.position = 'absolute'; 
-    
-    const pict = document.createElement('img'); 
-    pict.src = treeimga;
-    pict.style.width = '100px'; 
-    pict.style.position = 'relative'; 
-    pict.style.top = '340px'; 
-    pict.style.left = '100%';
-    pict.style.transform = 'translateX(-100%)'; 
-    pict.style.zIndex = '4'; 
-    pict.style.opacity = '1'; 
-    pict.style.float = 'none';
-
-    formiDiv.appendChild(pict);
-    pdfContent.appendChild(formiDiv); 
-}
+        const treeimga = localStorage.getItem('Alm_Col_tree');
+        if (treeimga) {
+            const formiDiv = document.createElement('div');
+            formiDiv.style.textAlign = 'center'; formiDiv.style.marginTop = '-450px'; formiDiv.style.position = 'absolute'; 
+            const pict = document.createElement('img'); pict.src = treeimga; pict.style.width = '100px'; pict.style.position = 'relative'; pict.style.top = '340px'; pict.style.left = '100%'; pict.style.transform = 'translateX(-100%)'; pict.style.zIndex = '4'; pict.style.opacity = '1'; formiDiv.appendChild(pict);
+            pdfContent.appendChild(formiDiv);
+        }
        
-   const watermarkimga = localStorage.getItem('Alm_Col_watermark');
-if (watermarkimga) {
-    const fromDiv = document.createElement('div');
-    fromDiv.style.textAlign = 'center';
-    fromDiv.style.marginTop = '-450px';
-    fromDiv.style.position = 'absolute'; 
-    
-    const img = document.createElement('img'); 
-    img.src = watermarkimga;
-    img.style.width = '450px'; 
-    img.style.position = 'relative'; 
-    img.style.top = '-150px'; 
-    img.style.left = '120%';
-    img.style.transform = 'translateX(-100%)'; 
-    img.style.zIndex = '2'; 
-    img.style.opacity = '0.12'; 
-    img.style.float = 'none';
+        const watermarkimga = localStorage.getItem('Alm_Col_watermark');
+        if (watermarkimga) {
+            const fromDiv = document.createElement('div');
+            fromDiv.style.textAlign = 'center'; fromDiv.style.marginTop = '-450px'; fromDiv.style.position = 'absolute'; 
+            const img = document.createElement('img'); img.src = watermarkimga; img.style.width = '450px'; img.style.position = 'relative'; img.style.top = '-150px'; img.style.left = '120%'; img.style.transform = 'translateX(-100%)'; img.style.zIndex = '2'; img.style.opacity = '0.12'; fromDiv.appendChild(img);
+            pdfContent.appendChild(fromDiv);
+        }
 
-    fromDiv.appendChild(img);
-    pdfContent.appendChild(fromDiv); 
-}
-
-
+        // التعامل مع الصور المرفقة
         const images = Array.from(document.querySelectorAll('#images-container img'));
         if (images.length) {
             let imagePage = document.createElement('div');
-            imagePage.style.pageBreakBefore = 'always';  
-            imagePage.style.display = 'grid';
-            
-            imagePage.style.gridTemplateColumns = '1fr 1fr';  
-            imagePage.style.gridTemplateRows = 'repeat(4, 1fr)';  
-            imagePage.style.gap = '30px';  
-
+            imagePage.style.pageBreakBefore = 'always'; imagePage.style.display = 'grid'; imagePage.style.gridTemplateColumns = '1fr 1fr'; imagePage.style.gridTemplateRows = 'repeat(4, 1fr)'; imagePage.style.gap = '30px'; 
             images.forEach((img, index) => {
                 const imgWrapper = document.createElement('div');
-                imgWrapper.style.width = '100%';
-                imgWrapper.style.height = '100%';
-                imgWrapper.style.paddingTop = '5px'; 
-
-                const clonedImg = img.cloneNode();
-                clonedImg.style.width = '300px';  
-                clonedImg.style.height = '200px';  
-                clonedImg.style.zIndex = '-1';
-                imgWrapper.appendChild(clonedImg);
-                imagePage.appendChild(imgWrapper);
-
+                imgWrapper.style.width = '100%'; imgWrapper.style.height = '100%'; imgWrapper.style.paddingTop = '5px';
+                const clonedImg = img.cloneNode(); clonedImg.style.width = '300px'; clonedImg.style.height = '200px'; clonedImg.style.zIndex = '-1';
+                imgWrapper.appendChild(clonedImg); imagePage.appendChild(imgWrapper);
                 if ((index + 1) % 8 === 0) {
                     pdfContent.appendChild(imagePage);
-                    
-                    imagePage = document.createElement('div');
-                    imagePage.style.pageBreakBefore = 'always';
-                    imagePage.style.display = 'grid';
-                    imagePage.style.gridTemplateColumns = '1fr 1fr';
-                    imagePage.style.gridTemplateRows = 'repeat(4, 1fr)';
-                    imagePage.style.gap = '30px';  
+                    imagePage = document.createElement('div'); imagePage.style.pageBreakBefore = 'always'; imagePage.style.display = 'grid'; imagePage.style.gridTemplateColumns = '1fr 1fr'; imagePage.style.gridTemplateRows = 'repeat(4, 1fr)'; imagePage.style.gap = '30px';
                 }
-                
             });
-
-            pdfContent.appendChild(imagePage);  
+            pdfContent.appendChild(imagePage);
         }
         
-        html2pdf()
-            .set({
-                margin: [20, 20, 20, 20],  
-                filename: `Colonoscopy_RH_Report_${serialNumber}.pdf`,
-                html2canvas: { scale: 2 },
-                jsPDF: {
-                    orientation: 'portrait',
-                    unit: 'mm',
-                    format: 'a4',
-                    header: function (data) {
-                        return { text: 'Colonoscopy Report ', align: 'center', fontSize: 12 };
-                    },
-                    footer: function (data) {
-                        return { text: `Page ${data.pageNumber}`, align: 'center', fontSize: 10 };
-                    }
-                }
-            })
-            .from(pdfContent)
-            .save()
-            .then(() => {
-                serialNumber++;
-                localStorage.setItem('Alm_Col_SerialNo', serialNumber);
-                document.getElementById('serial-no').value = `Col-${serialNumber}`;
-            });
+        html2pdf().set({
+            margin: [20, 20, 20, 20],
+            filename: `Colonoscopy_RH_Report_${serialNumber}.pdf`,
+            html2canvas: { scale: 2 },
+            jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' }
+        }).from(pdfContent).save().then(() => {
+            serialNumber++;
+            localStorage.setItem('Alm_Col_SerialNo', serialNumber);
+            document.getElementById('serial-no').value = `Col-${serialNumber}`;
+        });
     }
 </script>
 </body>
